@@ -1,11 +1,9 @@
-FROM __BASEIMAGE_ARCH__/alpine
-MAINTAINER Jonathan Weisberg <jo.weisberg@gmail.com>
+FROM alpine:3.19.1
+MAINTAINER Matthew Cornford <matthew.cornford@gmail.com>
 
-# Git source https://github.com/jazzdd86/phpVirtualbox.git
-__CROSS_COPY qemu-__QEMU_ARCH__-static /usr/bin
-RUN apk --no-cache --update add bash tzdata nginx php7-fpm php7-cli php7-common php7-json php7-soap php7-simplexml php7-session \
+RUN apk update && apk add --no-cache bash nginx php81-fpm php81-cli php81-common php81-json php81-soap php81-simplexml php81-session \
     && apk --no-cache --update add --virtual build-dependencies wget unzip \
-    && wget --no-check-certificate https://github.com/phpvirtualbox/phpvirtualbox/archive/develop.zip -O phpvirtualbox.zip \
+    && wget --no-check-certificate https://github.com/BartekSz95/phpvirtualbox/archive/main.zip -O phpvirtualbox.zip \
     && unzip phpvirtualbox.zip -d phpvirtualbox \
     && mkdir -p /var/www \
     && mv -v phpvirtualbox/*/* /var/www/ \
@@ -20,10 +18,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # config files
 COPY config.php /var/www/config.php
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY servers-from-env.php /servers-from-env.php
 
 # expose only nginx HTTP port
 EXPOSE 80
 
 # write linked instances to config, then monitor all services
-CMD php7 /servers-from-env.php && php-fpm7 && nginx
+CMD php-fpm81 && nginx
