@@ -20,7 +20,7 @@ COPY config.php /var/www/config.php
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # expose only nginx HTTP port
-EXPOSE 80
+EXPOSE 3080
 
 # write linked instances to config, then monitor all services
 CMD php-fpm81 && nginx
