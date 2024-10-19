@@ -3,7 +3,13 @@ MAINTAINER Matthew Cornford <matthew.cornford@gmail.com>
 
 RUN apk update && apk add --no-cache bash nginx php81-fpm php81-cli php81-common php81-json php81-soap php81-simplexml php81-session \
     && apk --no-cache --update add --virtual build-dependencies wget unzip \
-    && wget --no-check-certificate https://github.com/BartekSz95/phpvirtualbox/archive/main.zip -O phpvirtualbox.zip \
+#
+# Only supported Vbox 7.0
+#    && wget --no-check-certificate https://github.com/BartekSz95/phpvirtualbox/archive/main.zip -O phpvirtualbox.zip \
+# For Vbox 7.1
+# see https://github.com/BartekSz95/phpvirtualbox/issues/18
+#
+    && wget --no-check-certificate https://github.com/studnitskiy/phpvirtualbox/archive/main.zip -O phpvirtualbox.zip \
     && unzip phpvirtualbox.zip -d phpvirtualbox \
     && mkdir -p /var/www \
     && mv -v phpvirtualbox/*/* /var/www/ \

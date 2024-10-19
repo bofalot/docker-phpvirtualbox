@@ -6,7 +6,7 @@ var $username = 'matthew';
 var $password = '19windingshott';
 
 /* SOAP URL of vboxwebsrv (not phpVirtualBox's URL) */
-var $location = 'http://172.30.1.24:5678/';
+var $location = 'http://vbox_websrv:18083/';
 
 var $language = 'en';
 
