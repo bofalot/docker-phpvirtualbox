@@ -11,7 +11,7 @@ var $location = 'http://vbox_websrv:18083/';
 var $language = 'en';
 
 /* Set the standard VRDE Port Number / Range, e.g. 1010-1020 or 1027 */
-var $vrdeports = '9000-9010';
+var $vrdeports = '9005-9010';
 var $vrdeaddress = '0.0.0.0';
 
 
